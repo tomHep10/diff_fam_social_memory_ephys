@@ -521,7 +521,7 @@ class LFPRecording:
             )
 
             # Load additional attributes that aren't part of initialization
-            if ["first_timestamp"] in metadata.attrs.keys():
+            if "first_timestamp" in metadata.attrs.keys():
                 recording.first_timestamp = metadata.attrs["first_timestamp"]
             recording.name = metadata.attrs["name"]
             recording.rec_length = metadata.attrs["recording length"]

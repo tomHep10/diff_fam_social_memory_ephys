@@ -85,6 +85,8 @@ def get_behavior_bouts_frame(boris_df, cameratimestamps, first_timestamp, subjec
             # adjust for first timestamp
             start_stop_array_ms = start_stop_array_play_indexed * 1000  # convert to ms
             return start_stop_array_ms
+        else:
+            print(f"no bouts for behavior {behavior}")
 
     # Return empty array with correct shape if no data found
     return np.empty((0, 2))
@@ -158,8 +160,11 @@ def get_behavior_bouts_fps(boris_df, cameratimestamps, first_timestamp, subject,
             # adjust for first timestamp
             start_stop_array_ms = start_stop_array_play_indexed * 1000  # convert to ms
             return start_stop_array_ms
+        else:
+            print(f"no bouts for behavior {behavior}")
 
     # Return empty array with correct shape if no data found
+    print("fps has issues here")
     return np.empty((0, 2))
 
 
