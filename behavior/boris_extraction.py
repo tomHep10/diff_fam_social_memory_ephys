@@ -164,7 +164,7 @@ def get_behavior_bouts_fps(boris_df, cameratimestamps, first_timestamp, subject,
             print(f"no bouts for behavior {behavior}")
 
     # Return empty array with correct shape if no data found
-    print("fps has issues here")
+    print("\nno start stop arrays for this behavior")
     return np.empty((0, 2))
 
 

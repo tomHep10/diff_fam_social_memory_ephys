@@ -39,6 +39,9 @@ class SpikeCollection:
         for root, dirs, files in os.walk(self.path):
             for directory in dirs:
                 if directory.endswith("merged.rec"):
+                    if not ('_d0_' in directory or '_d7_' in directory):
+                        print("--skipping--")
+                        continue
                     print("loading ", directory)
                     recording = SpikeRecording(
                         os.path.join(self.path, directory),
@@ -59,6 +62,7 @@ class SpikeCollection:
                                 recording.event_dict = self.event_dict[directory]
                             except KeyError:
                                 print(f"{directory} not found in event dict")
+                        
                         collection.append(recording)
         self.recordings = collection
 
@@ -94,11 +98,12 @@ class SpikeCollection:
                 missing_events.append(recording.name)
             else:
                 if is_first:
-                    last_recording_events = list(recording.event_dict.keys()).sort()
+                    last_recording_events = sorted(recording.event_dict.keys())
                     is_first = False
                 else:
-                    if list(recording.event_dict.keys()).sort() != last_recording_events:
+                    if sorted(recording.event_dict.keys()) != last_recording_events:
                         event_dicts_same = False
+
                 for value in recording.event_dict.values():
                     if type(value) is np.ndarray:
                         if (value.ndim == 2) & (value.shape[1] == 2):
